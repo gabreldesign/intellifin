@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LandPage Fácil - Sua Página de Vendas em 48 Horas</title>
+    
+    <!-- Google Fonts: Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS for rapid UI development -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* Custom styles and animations */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Animated Gradient Background */
+        .animated-gradient {
+            background: linear-gradient(135deg, #6B46C1, #4299E1, #6B46C1);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Scroll-triggered fade-in animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Interactive element transitions */
+        .interactive-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .interactive-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* CTA Button hover effect */
+        .cta-button {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* FAQ Accordion styles */
+        .faq-question {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .faq-question:hover {
+            background-color: #f7fafc; /* light gray on hover */
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            padding: 0 1.5rem;
+        }
+        .faq-item.active .faq-answer {
+            padding: 1rem 1.5rem 1.5rem;
+            max-height: 200px; /* Adjust as needed */
+        }
+        .faq-item.active .faq-question {
+             background-color: #faf5ff; /* light purple when active */
+        }
+        .faq-item.active .faq-arrow {
+            transform: rotate(180deg);
+        }
+        .faq-arrow {
+            transition: transform 0.4s ease;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header Section -->
+    <header class="animated-gradient text-white py-20 px-6 text-center overflow-hidden">
+        <div class="container mx-auto max-w-4xl">
+            <h1 class="text-4xl md:text-6xl font-black mb-4 fade-in-section">Sua página de vendas pronta em até 48 horas</h1>
+            <p class="text-lg md:text-2xl font-light mb-8 fade-in-section" style="animation-delay: 0.2s;">A solução perfeita para você vender mais com estilo e agilidade</p>
+            <a href="#pricing" class="cta-button bg-white text-purple-600 font-bold py-4 px-10 rounded-full text-lg inline-block fade-in-section" style="animation-delay: 0.4s;">
+                Quero minha landpage agora!
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Demonstration Section -->
+        <section id="demo" class="py-20 px-6">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 fade-in-section">Transforme visitantes em clientes</h2>
+                <p class="text-lg text-gray-600 mb-12 max-w-2xl mx-auto fade-in-section">Veja como sua página pode se parecer: profissional, limpa e focada em resultados.</p>
+                
+                <!-- Mockup -->
+                <div class="max-w-4xl mx-auto bg-white p-4 rounded-xl shadow-2xl border border-gray-200 fade-in-section">
+                    <div class="flex items-center pb-3 border-b border-gray-200 mb-3">
+                        <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                        <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
+                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                        <div class="flex-grow text-center text-sm text-gray-500">meuproduto.com</div>
+                    </div>
+                    <div class="bg-gray-100 p-8 rounded-lg">
+                        <div class="flex flex-col md:flex-row items-center gap-8">
+                            <div class="md:w-1/2">
+                                <img src="https://placehold.co/500x500/6B46C1/FFFFFF?text=Seu+Produto" alt="Mockup de um produto" class="rounded-lg shadow-lg w-full">
+                            </div>
+                            <div class="md:w-1/2 text-left">
+                                <h3 class="text-2xl font-bold mb-2">Curso Online de Marketing Digital</h3>
+                                <p class="text-gray-600 mb-4">Aprenda as estratégias que geram resultados e alavanque sua carreira ou negócio.</p>
+                                <button class="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105">
+                                    Comprar Agora por R$497
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advantages Section -->
+        <section id="advantages" class="bg-white py-20 px-6">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12 fade-in-section">Vantagens que fazem a diferença</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+                    <!-- Advantage Item 1 -->
+                    <div class="fade-in-section p-6 interactive-card rounded-lg">
+                        <div class="bg-purple-100 text-purple-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Entrega em 48 Horas</h3>
+                        <p class="text-gray-600">Sua página no ar em tempo recorde para você não perder nenhuma oportunidade.</p>
+                    </div>
+                    <!-- Advantage Item 2 -->
+                    <div class="fade-in-section p-6 interactive-card rounded-lg">
+                        <div class="bg-purple-100 text-purple-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Design Moderno e Responsivo</h3>
+                        <p class="text-gray-600">Visual impactante que funciona perfeitamente em celulares, tablets e desktops.</p>
+                    </div>
+                    <!-- Advantage Item 3 -->
+                    <div class="fade-in-section p-6 interactive-card rounded-lg">
+                        <div class="bg-purple-100 text-purple-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Otimizada para Conversão</h3>
+                        <p class="text-gray-600">Estrutura pensada para guiar seu cliente até a ação desejada: comprar ou contatar.</p>
+                    </div>
+                    <!-- Advantage Item 4 -->
+                    <div class="fade-in-section p-6 interactive-card rounded-lg">
+                        <div class="bg-purple-100 text-purple-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Integração Direta</h3>
+                        <p class="text-gray-600">Leve seus clientes direto para o WhatsApp, Instagram, Linktree ou onde você preferir.</p>
+                    </div>
+                     <!-- Advantage Item 5 -->
+                    <div class="fade-in-section p-6 interactive-card rounded-lg">
+                        <div class="bg-purple-100 text-purple-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Sem Mensalidade Obrigatória</h3>
+                        <p class="text-gray-600">Pague uma vez e a página é sua para sempre. Hospedagem gratuita via GitHub.</p>
+                    </div>
+                     <!-- Advantage Item 6 -->
+                    <div class="fade-in-section p-6 interactive-card rounded-lg">
+                        <div class="bg-purple-100 text-purple-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l-2.293-2.293a1 1 0 010-1.414l7-7a1 1 0 011.414 0l7 7a1 1 0 010 1.414L17 21m-7-3a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Ideal Para Todos os Negócios</h3>
+                        <p class="text-gray-600">Perfeita para produtos, serviços, eventos, cursos, perfis e negócios locais.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial Section -->
+        <section id="testimonial" class="py-20 px-6 bg-gray-50">
+            <div class="container mx-auto max-w-3xl text-center fade-in-section">
+                <div class="bg-white p-12 rounded-xl shadow-lg border interactive-card">
+                    <img src="https://placehold.co/100x100/4299E1/FFFFFF?text=J" alt="Foto do cliente" class="w-24 h-24 rounded-full mx-auto -mt-24 border-4 border-white shadow-md">
+                    <p class="text-xl italic text-gray-700 my-6">"Vendi meu curso com a LandPage Fácil e economizei tempo e dinheiro! O processo foi super rápido e o resultado ficou mais profissional do que eu imaginava. Recomendo demais!"</p>
+                    <h4 class="font-bold text-lg">Juliana Silva</h4>
+                    <p class="text-gray-500">Criadora de Conteúdo</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-20 px-6 bg-white">
+            <div class="container mx-auto max-w-4xl text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 fade-in-section">Um investimento, retorno infinito.</h2>
+                <p class="text-lg text-gray-600 mb-12 max-w-2xl mx-auto fade-in-section">Tenha sua página profissional com um pagamento único e transparente.</p>
+                <div class="bg-gradient-to-br from-purple-600 to-blue-500 text-white p-8 md:p-12 rounded-2xl shadow-2xl max-w-2xl mx-auto fade-in-section interactive-card">
+                    <h3 class="text-2xl font-semibold mb-2">LandPage Fácil</h3>
+                    <p class="text-5xl md:text-6xl font-black mb-4">R$ 1.100</p>
+                    <p class="font-light mb-8">Pagamento único</p>
+                    <ul class="text-left space-y-4 mb-10 inline-block">
+                        <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Criação e personalização completa</li>
+                        <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Entrega em até 48 horas</li>
+                        <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Hospedagem gratuita (GitHub Pages)</li>
+                        <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Redirecionamento para redes sociais</li>
+                        <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Layout 100% responsivo</li>
+                    </ul>
+                    <a href="https://instagram.com/marllongabrel" target="_blank" class="cta-button bg-white text-purple-600 font-bold py-4 px-10 rounded-full text-lg inline-block w-full max-w-md">
+                        Contratar Agora
+                    </a>
+                </div>
+                 <div class="mt-8 fade-in-section">
+                    <h4 class="text-xl font-bold mb-2">Precisa de Manutenção?</h4>
+                    <p class="text-gray-600">Para atualizações e edições futuras, oferecemos um plano opcional de <strong class="text-purple-600">R$ 150,00 mensal</strong>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-20 px-6">
+            <div class="container mx-auto max-w-3xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 fade-in-section">Dúvidas Frequentes</h2>
+                <div class="space-y-4 fade-in-section">
+                    <!-- FAQ Item 1 -->
+                    <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="faq-question flex justify-between items-center p-6">
+                            <h4 class="font-semibold text-lg">Posso usar meu próprio domínio?</h4>
+                            <div class="faq-arrow w-6 h-6 text-purple-500">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                        </div>
+                        <div class="faq-answer text-gray-600">
+                            <p>Sim! A página é entregue com os arquivos prontos. Você pode hospedá-la gratuitamente no GitHub Pages ou em qualquer outro servidor e apontar seu domínio para ela sem problemas.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 2 -->
+                    <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="faq-question flex justify-between items-center p-6">
+                            <h4 class="font-semibold text-lg">Preciso de um formulário de contato?</h4>
+                            <div class="faq-arrow w-6 h-6 text-purple-500">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                        </div>
+                        <div class="faq-answer text-gray-600">
+                            <p>O foco do LandPage Fácil é a conversão rápida e direta, por isso priorizamos o redirecionamento para canais como WhatsApp ou e-mail. Caso precise de um formulário, podemos avaliar a inclusão como um item adicional.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 3 -->
+                    <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="faq-question flex justify-between items-center p-6">
+                            <h4 class="font-semibold text-lg">As imagens e textos estão inclusos?</h4>
+                            <div class="faq-arrow w-6 h-6 text-purple-500">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                        </div>
+                        <div class="faq-answer text-gray-600">
+                            <p>Você nos envia os textos, sua logo e as imagens que deseja usar. Nós cuidamos de toda a parte de design e estruturação para que sua identidade visual seja perfeitamente aplicada à página.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="animated-gradient text-white py-20 px-6">
+            <div class="container mx-auto text-center max-w-3xl">
+                <h2 class="text-3xl md:text-5xl font-black mb-6 fade-in-section">Pronto para Lançar sua Página de Sucesso?</h2>
+                <p class="text-lg md:text-xl font-light mb-10 fade-in-section">Não espere mais. Fale conosco e tenha sua landing page profissional no ar em 48 horas.</p>
+                <a href="https://instagram.com/marllongabrel" target="_blank" class="cta-button bg-white text-purple-600 font-bold py-4 px-12 rounded-full text-xl inline-block fade-in-section">
+                    Quero minha landpage agora!
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 px-6">
+        <div class="container mx-auto text-center text-gray-400">
+            <p>&copy; 2024 LandPage Fácil. Todos os direitos reservados.</p>
+            <p>Criado com❤️ para impulsionar seu negócio.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for animations and FAQ accordion
+
+        // Scroll-triggered animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.fade-in-section');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Use a timeout to stagger the animation slightly for a nicer effect
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, 200);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // FAQ Accordion
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const currentlyActive = document.querySelector('.faq-item.active');
+                    if (currentlyActive && currentlyActive !== item) {
+                        currentlyActive.classList.remove('active');
+                    }
+                    item.classList.toggle('active');
+                });
+            });
+        });
+
+    </script>
+
+</body>
+</html>
