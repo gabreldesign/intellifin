@@ -12,7 +12,7 @@
         body { font-family: 'Inter', sans-serif; }
         .page { display: none; }
         .page.active { display: block; }
-        .auth-page {
+        .auth-page, .loading-page {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -39,10 +39,21 @@
 <body class="bg-gray-100">
 
     <div id="app-root">
-        <!-- O conteúdo do App (telas de login ou o app principal) será renderizado aqui -->
+        <!-- O conteúdo do App será renderizado aqui -->
     </div>
 
     <!-- =============== TEMPLATES GLOBAIS =============== -->
+
+    <!-- Template de Carregamento -->
+    <template id="template-loading">
+        <div class="page loading-page bg-white active">
+            <svg class="animate-spin h-8 w-8 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <p class="mt-4 text-gray-600">A carregar os seus dados...</p>
+        </div>
+    </template>
 
     <!-- Template da Tela de Boas-Vindas -->
     <template id="template-welcome">
@@ -57,7 +68,7 @@
                     </svg>
                 </div>
                 <h1 class="mt-6 text-3xl font-bold tracking-tight text-gray-900 animate-fadeInUp delay-1" style="opacity:0;">Bem-vindo à sua nova vida financeira</h1>
-                <p class="mt-4 text-lg text-gray-600 animate-fadeInUp delay-2" style="opacity:0;">O IntelliFin ajuda você a tomar o controle do seu dinheiro.</p>
+                <p class="mt-4 text-lg text-gray-600 animate-fadeInUp delay-2" style="opacity:0;">O IntelliFin ajuda-o a tomar o controlo do seu dinheiro.</p>
             </div>
             <div class="mt-10 w-full max-w-sm animate-fadeInUp delay-3" style="opacity:0;">
                 <button id="welcome-login-btn" class="w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">Entrar</button>
@@ -69,12 +80,12 @@
     <!-- Template da Tela de Login -->
     <template id="template-login">
         <div class="page auth-page bg-white">
-            <h2 class="text-2xl font-bold text-center">Acesse sua Conta</h2>
+            <h2 class="text-2xl font-bold text-center">Aceda à sua Conta</h2>
             <form id="login-form" class="mt-8 w-full max-w-sm space-y-6">
-                <input type="email" id="login-email" placeholder="Seu e-mail" required class="block w-full rounded-md border-0 py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600">
-                <input type="password" id="login-password" placeholder="Sua senha" required class="block w-full rounded-md border-0 py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600">
+                <input type="email" id="login-email" placeholder="O seu e-mail" required class="block w-full rounded-md border-0 py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600">
+                <input type="password" id="login-password" placeholder="A sua senha" required class="block w-full rounded-md border-0 py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600">
                 <button type="submit" class="w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">Entrar</button>
-                <p class="text-center text-sm">Não tem uma conta? <a href="#" id="goto-register" class="font-semibold text-indigo-600 hover:text-indigo-500">Cadastre-se</a></p>
+                <p class="text-center text-sm">Não tem uma conta? <a href="#" id="goto-register" class="font-semibold text-indigo-600 hover:text-indigo-500">Registe-se</a></p>
             </form>
         </div>
     </template>
@@ -82,9 +93,9 @@
     <!-- Template da Tela de Cadastro -->
     <template id="template-register">
         <div class="page auth-page bg-white">
-            <h2 class="text-2xl font-bold text-center">Crie sua Conta</h2>
+            <h2 class="text-2xl font-bold text-center">Crie a sua Conta</h2>
             <form id="register-form" class="mt-8 w-full max-w-sm space-y-6">
-                <input type="email" id="register-email" placeholder="Seu e-mail" required class="block w-full rounded-md border-0 py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600">
+                <input type="email" id="register-email" placeholder="O seu e-mail" required class="block w-full rounded-md border-0 py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600">
                 <input type="password" id="register-password" placeholder="Crie uma senha" required class="block w-full rounded-md border-0 py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600">
                 <button type="submit" class="w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">Criar Conta</button>
                 <p class="text-center text-sm">Já tem uma conta? <a href="#" id="goto-login" class="font-semibold text-indigo-600 hover:text-indigo-500">Faça login</a></p>
@@ -117,7 +128,7 @@
             <header class="flex justify-between items-center mb-6">
                 <div>
                     <h1 id="dashboard-greeting" class="text-2xl font-bold text-gray-800">Olá!</h1>
-                    <p class="text-sm text-gray-500">Seu resumo financeiro.</p>
+                    <p class="text-sm text-gray-500">O seu resumo financeiro.</p>
                 </div>
                 <img id="dashboard-profile-pic" src="https://placehold.co/48x48/6366F1/FFFFFF?text=U" alt="Foto de Perfil" class="w-12 h-12 rounded-full object-cover">
             </header>
@@ -135,7 +146,7 @@
                     <span id="budget-percentage" class="text-sm font-medium text-gray-500">0% usado</span>
                 </div>
                 <div class="w-full bg-gray-200 rounded-full h-2.5"><div id="budget-bar" class="bg-gradient-to-r from-cyan-400 to-blue-500 h-2.5 rounded-full" style="width: 0%"></div></div>
-                <p id="budget-summary" class="text-xs text-gray-400 mt-1 text-right">Carregando...</p>
+                <p id="budget-summary" class="text-xs text-gray-400 mt-1 text-right">A carregar...</p>
             </section>
             <section>
                 <h3 class="font-semibold text-gray-700 mb-3">Transações Recentes</h3>
@@ -146,7 +157,7 @@
 
     <template id="page-profile">
         <div class="page p-4 pb-24">
-            <h1 class="text-2xl font-bold text-gray-800 mb-6">Meu Perfil</h1>
+            <h1 class="text-2xl font-bold text-gray-800 mb-6">O meu Perfil</h1>
             <form id="profile-form" class="space-y-6">
                 <div class="flex flex-col items-center space-y-4">
                     <img id="profile-pic-preview" src="https://placehold.co/96x96/6366F1/FFFFFF?text=U" alt="Foto de Perfil" class="w-24 h-24 rounded-full object-cover">
@@ -165,7 +176,7 @@
                         <input type="number" id="profile-age" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                     </div>
                     <div>
-                        <label for="profile-gender" class="block text-sm font-medium text-gray-700">Gênero</label>
+                        <label for="profile-gender" class="block text-sm font-medium text-gray-700">Género</label>
                         <select id="profile-gender" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                             <option>Prefiro não dizer</option>
                             <option>Masculino</option>
@@ -182,17 +193,17 @@
 
                 <div class="grid grid-cols-2 gap-4">
                      <div>
-                        <label for="profile-main-income" class="block text-sm font-medium text-gray-700">Renda Principal (R$)</label>
+                        <label for="profile-main-income" class="block text-sm font-medium text-gray-700">Rendimento Principal (R$)</label>
                         <input type="number" id="profile-main-income" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                     </div>
                      <div>
-                        <label for="profile-extra-income" class="block text-sm font-medium text-gray-700">Renda Extra (R$)</label>
+                        <label for="profile-extra-income" class="block text-sm font-medium text-gray-700">Rendimento Extra (R$)</label>
                         <input type="number" id="profile-extra-income" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                     </div>
                 </div>
 
                 <div class="pt-4 space-y-4">
-                    <button type="submit" class="w-full py-2.5 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700">Salvar Alterações</button>
+                    <button type="submit" class="w-full py-2.5 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700">Guardar Alterações</button>
                     <button type="button" id="logout-btn" class="w-full py-2.5 px-4 bg-rose-600 text-white font-semibold rounded-lg hover:bg-rose-700">Sair da Conta</button>
                 </div>
             </form>
@@ -229,7 +240,7 @@
                     <label for="date" class="text-sm font-medium text-gray-700">Data</label>
                     <input type="date" name="date" id="date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
                 </div>
-                <div class="pt-2"><button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">Salvar Transação</button></div>
+                <div class="pt-2"><button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">Guardar Transação</button></div>
             </form>
         </div>
     </template>
@@ -316,7 +327,7 @@
             const email = document.getElementById('register-email').value;
             const password = document.getElementById('register-password').value;
             try { await auth.createUserWithEmailAndPassword(email, password); } 
-            catch (error) { alert("Erro no cadastro: " + error.message); }
+            catch (error) { alert("Erro no registo: " + error.message); }
         }
 
         function handleLogout() { auth.signOut(); }
@@ -324,8 +335,10 @@
         // --- Listener de Estado de Autenticação ---
         auth?.onAuthStateChanged(user => {
             if (user) {
-                currentUser = user;
-                initializeApp();
+                if (!currentUser) { // Evita re-inicializações desnecessárias
+                    currentUser = user;
+                    initializeApp();
+                }
             } else {
                 currentUser = null;
                 showWelcomeScreen();
@@ -338,8 +351,9 @@
         let goals = [];
 
         async function initializeApp() {
-            appRoot.innerHTML = pageTemplates.mainApp;
+            appRoot.innerHTML = pageTemplates.loading; // Mostra o ecrã de carregamento
             await loadUserData();
+            appRoot.innerHTML = pageTemplates.mainApp; // Carrega o shell principal do app
             window.addEventListener('hashchange', () => navigateTo(window.location.hash));
             navigateTo(window.location.hash || '#dashboard');
         }
@@ -373,6 +387,9 @@
             const appContainer = document.getElementById('app-container');
             if (pageTemplates[pageId] && appContainer) {
                 appContainer.innerHTML = pageTemplates[pageId];
+                const newPage = appContainer.querySelector('.page');
+                if (newPage) newPage.classList.add('active');
+                
                 runPageScripts(pageId);
                 updateNavLinks(hash || '#dashboard');
             }
@@ -403,7 +420,7 @@
         function renderDashboard() {
             const greeting = document.getElementById('dashboard-greeting');
             const profilePic = document.getElementById('dashboard-profile-pic');
-            const firstName = profile.name ? profile.name.split(' ')[0] : 'Usuário';
+            const firstName = profile.name ? profile.name.split(' ')[0] : 'Utilizador';
             greeting.textContent = `Olá, ${firstName}!`;
             profilePic.src = profile.photoURL || `https://placehold.co/48x48/6366F1/FFFFFF?text=${firstName.charAt(0)}`;
 
@@ -498,6 +515,7 @@
         // --- Inicialização da Aplicação ---
         function bootApp() {
             pageTemplates = {
+                loading: document.getElementById('template-loading').innerHTML,
                 welcome: document.getElementById('template-welcome').innerHTML,
                 login: document.getElementById('template-login').innerHTML,
                 register: document.getElementById('template-register').innerHTML,
@@ -510,7 +528,7 @@
             };
 
             if (!auth) {
-                appRoot.innerHTML = `<div class="p-4 text-center text-red-600">Falha ao conectar com os serviços. Tente recarregar a página.</div>`;
+                appRoot.innerHTML = `<div class="p-4 text-center text-red-600">Falha ao ligar aos serviços. Tente recarregar a página.</div>`;
             } else if (!auth.currentUser) {
                 showWelcomeScreen();
             }
