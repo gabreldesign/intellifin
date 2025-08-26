@@ -3,347 +3,521 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LandPage Fácil - Sua Página de Vendas em 48 Horas</title>
-    
-    <!-- Google Fonts: Montserrat -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS for rapid UI development -->
+    <title>IntelliFin - Sua Nova Vida Financeira</title>
+    <!-- Ícone da Aba (Favicon) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles and animations */
-        body {
-            font-family: 'Montserrat', sans-serif;
-            scroll-behavior: smooth;
+        body { font-family: 'Inter', sans-serif; }
+        .page { display: none; }
+        .page.active { display: block; }
+        .auth-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
         }
-
-        /* Animated Gradient Background */
-        .animated-gradient {
-            background: linear-gradient(135deg, #6B46C1, #4299E1, #6B46C1);
-            background-size: 400% 400%;
-            animation: gradientAnimation 15s ease infinite;
+        input[type="radio"]:checked + label {
+            background-color: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
         }
-
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Animações */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        /* Scroll-triggered fade-in animation */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(25px);
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-        }
-
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Interactive element transitions */
-        .interactive-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .interactive-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* CTA Button hover effect */
-        .cta-button {
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        /* FAQ Accordion styles */
-        .faq-question {
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .faq-question:hover {
-            background-color: #f7fafc; /* light gray on hover */
-        }
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
-            padding: 0 1.5rem;
-        }
-        .faq-item.active .faq-answer {
-            padding: 1rem 1.5rem 1.5rem;
-            max-height: 200px; /* Adjust as needed */
-        }
-        .faq-item.active .faq-question {
-             background-color: #faf5ff; /* light purple when active */
-        }
-        .faq-item.active .faq-arrow {
-            transform: rotate(180deg);
-        }
-        .faq-arrow {
-            transition: transform 0.4s ease;
-        }
-
+        .animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-100">
 
-    <!-- Header Section -->
-    <header class="animated-gradient text-white py-20 px-6 text-center overflow-hidden">
-        <div class="container mx-auto max-w-4xl">
-            <h1 class="text-4xl md:text-6xl font-black mb-4 fade-in-section">Sua página de vendas pronta em até 48 horas</h1>
-            <p class="text-lg md:text-2xl font-light mb-8 fade-in-section" style="animation-delay: 0.2s;">A solução perfeita para você vender mais com estilo e agilidade</p>
-            <a href="#pricing" class="cta-button bg-white text-purple-600 font-bold py-4 px-10 rounded-full text-lg inline-block fade-in-section" style="animation-delay: 0.4s;">
-                Quero minha landpage agora!
-            </a>
+    <div id="app-root">
+        <!-- O conteúdo do App (telas de login ou o app principal) será renderizado aqui -->
+    </div>
+
+    <!-- =============== TEMPLATES GLOBAIS =============== -->
+
+    <!-- Template da Tela de Boas-Vindas -->
+    <template id="template-welcome">
+        <div class="page auth-page bg-white">
+            <div class="text-center">
+                <div class="animate-fadeInUp">
+                    <svg class="mx-auto h-16 w-auto text-indigo-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M8 16V12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 16V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 16V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h1 class="mt-6 text-3xl font-bold tracking-tight text-gray-900 animate-fadeInUp delay-1" style="opacity:0;">Bem-vindo à sua nova vida financeira</h1>
+                <p class="mt-4 text-lg text-gray-600 animate-fadeInUp delay-2" style="opacity:0;">O IntelliFin ajuda você a tomar o controle do seu dinheiro.</p>
+            </div>
+            <div class="mt-10 w-full max-w-sm animate-fadeInUp delay-3" style="opacity:0;">
+                <button id="welcome-login-btn" class="w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">Entrar</button>
+                <button id="welcome-register-btn" class="mt-4 w-full rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Criar Conta</button>
+            </div>
         </div>
-    </header>
+    </template>
 
-    <main>
-        <!-- Demonstration Section -->
-        <section id="demo" class="py-20 px-6">
-            <div class="container mx-auto text-center">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 fade-in-section">Transforme visitantes em clientes</h2>
-                <p class="text-lg text-gray-600 mb-12 max-w-2xl mx-auto fade-in-section">Veja como sua página pode se parecer: profissional, limpa e focada em resultados.</p>
+    <!-- Template da Tela de Login -->
+    <template id="template-login">
+        <div class="page auth-page bg-white">
+            <h2 class="text-2xl font-bold text-center">Acesse sua Conta</h2>
+            <form id="login-form" class="mt-8 w-full max-w-sm space-y-6">
+                <input type="email" id="login-email" placeholder="Seu e-mail" required class="block w-full rounded-md border-0 py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600">
+                <input type="password" id="login-password" placeholder="Sua senha" required class="block w-full rounded-md border-0 py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600">
+                <button type="submit" class="w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">Entrar</button>
+                <p class="text-center text-sm">Não tem uma conta? <a href="#" id="goto-register" class="font-semibold text-indigo-600 hover:text-indigo-500">Cadastre-se</a></p>
+            </form>
+        </div>
+    </template>
+
+    <!-- Template da Tela de Cadastro -->
+    <template id="template-register">
+        <div class="page auth-page bg-white">
+            <h2 class="text-2xl font-bold text-center">Crie sua Conta</h2>
+            <form id="register-form" class="mt-8 w-full max-w-sm space-y-6">
+                <input type="email" id="register-email" placeholder="Seu e-mail" required class="block w-full rounded-md border-0 py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600">
+                <input type="password" id="register-password" placeholder="Crie uma senha" required class="block w-full rounded-md border-0 py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600">
+                <button type="submit" class="w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">Criar Conta</button>
+                <p class="text-center text-sm">Já tem uma conta? <a href="#" id="goto-login" class="font-semibold text-indigo-600 hover:text-indigo-500">Faça login</a></p>
+            </form>
+        </div>
+    </template>
+
+    <!-- Template do App Principal (Shell) -->
+    <template id="template-main-app">
+        <div id="app-container" class="container mx-auto max-w-sm bg-white min-h-screen shadow-lg">
+            <!-- As páginas do app serão injetadas aqui -->
+        </div>
+        <nav id="main-nav" class="fixed bottom-0 left-0 right-0 bg-white border-t max-w-sm mx-auto shadow-inner z-10">
+            <div class="flex justify-around h-16">
+                <a href="#dashboard" class="nav-link flex flex-col items-center justify-center w-full text-indigo-600"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg><span class="text-xs font-medium">Início</span></a>
+                <a href="#reports" class="nav-link flex flex-col items-center justify-center w-full text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" /></svg><span class="text-xs font-medium">Relatórios</span></a>
+                <a href="#add" class="nav-link flex flex-col items-center justify-center w-full text-gray-400"><div class="w-14 h-14 -mt-6 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white shadow-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" /></svg></div></a>
+                <a href="#goals" class="nav-link flex flex-col items-center justify-center w-full text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg><span class="text-xs font-medium">Metas</span></a>
+                <a href="#profile" class="nav-link flex flex-col items-center justify-center w-full text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" /></svg><span class="text-xs font-medium">Perfil</span></a>
+            </div>
+        </nav>
+        <button id="chatbot-fab" class="fixed bottom-20 right-4 bg-indigo-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-20">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+        </button>
+    </template>
+    
+    <!-- Templates das Páginas do App -->
+    <template id="page-dashboard">
+         <div class="page p-4 pb-24">
+            <header class="flex justify-between items-center mb-6">
+                <div>
+                    <h1 id="dashboard-greeting" class="text-2xl font-bold text-gray-800">Olá!</h1>
+                    <p class="text-sm text-gray-500">Seu resumo financeiro.</p>
+                </div>
+                <img id="dashboard-profile-pic" src="https://placehold.co/48x48/6366F1/FFFFFF?text=U" alt="Foto de Perfil" class="w-12 h-12 rounded-full object-cover">
+            </header>
+            <section class="bg-gradient-to-br from-blue-500 to-indigo-600 text-white p-6 rounded-2xl mb-6 shadow-lg">
+                <h2 class="text-sm font-medium opacity-80 mb-1">Saldo Total</h2>
+                <p id="dashboard-balance" class="text-4xl font-bold tracking-tight">R$ 0,00</p>
+                <div class="flex justify-between mt-4 text-sm">
+                    <div><span class="opacity-80">Ganhos</span><p id="dashboard-income" class="font-semibold">R$ 0,00</p></div>
+                    <div class="text-right"><span class="opacity-80">Despesas</span><p id="dashboard-expenses" class="font-semibold">R$ 0,00</p></div>
+                </div>
+            </section>
+            <section class="mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <h3 class="font-semibold text-gray-700">Orçamento do Mês</h3>
+                    <span id="budget-percentage" class="text-sm font-medium text-gray-500">0% usado</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5"><div id="budget-bar" class="bg-gradient-to-r from-cyan-400 to-blue-500 h-2.5 rounded-full" style="width: 0%"></div></div>
+                <p id="budget-summary" class="text-xs text-gray-400 mt-1 text-right">Carregando...</p>
+            </section>
+            <section>
+                <h3 class="font-semibold text-gray-700 mb-3">Transações Recentes</h3>
+                <div id="recent-transactions" class="space-y-3"></div>
+            </section>
+        </div>
+    </template>
+
+    <template id="page-profile">
+        <div class="page p-4 pb-24">
+            <h1 class="text-2xl font-bold text-gray-800 mb-6">Meu Perfil</h1>
+            <form id="profile-form" class="space-y-6">
+                <div class="flex flex-col items-center space-y-4">
+                    <img id="profile-pic-preview" src="https://placehold.co/96x96/6366F1/FFFFFF?text=U" alt="Foto de Perfil" class="w-24 h-24 rounded-full object-cover">
+                    <input type="file" id="profile-pic-upload" class="hidden" accept="image/*">
+                    <button type="button" id="change-pic-btn" class="text-sm font-semibold text-indigo-600">Alterar Foto</button>
+                </div>
                 
-                <!-- Mockup -->
-                <div class="max-w-4xl mx-auto bg-white p-4 rounded-xl shadow-2xl border border-gray-200 fade-in-section">
-                    <div class="flex items-center pb-3 border-b border-gray-200 mb-3">
-                        <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
-                        <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
-                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                        <div class="flex-grow text-center text-sm text-gray-500">meuproduto.com</div>
+                <div>
+                    <label for="profile-name" class="block text-sm font-medium text-gray-700">Nome Completo</label>
+                    <input type="text" id="profile-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="profile-age" class="block text-sm font-medium text-gray-700">Idade</label>
+                        <input type="number" id="profile-age" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                     </div>
-                    <div class="bg-gray-100 p-8 rounded-lg">
-                        <div class="flex flex-col md:flex-row items-center gap-8">
-                            <div class="md:w-1/2">
-                                <img src="https://placehold.co/500x500/6B46C1/FFFFFF?text=Seu+Produto" alt="Mockup de um produto" class="rounded-lg shadow-lg w-full">
-                            </div>
-                            <div class="md:w-1/2 text-left">
-                                <h3 class="text-2xl font-bold mb-2">Curso Online de Marketing Digital</h3>
-                                <p class="text-gray-600 mb-4">Aprenda as estratégias que geram resultados e alavanque sua carreira ou negócio.</p>
-                                <button class="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105">
-                                    Comprar Agora por R$497
-                                </button>
-                            </div>
-                        </div>
+                    <div>
+                        <label for="profile-gender" class="block text-sm font-medium text-gray-700">Gênero</label>
+                        <select id="profile-gender" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            <option>Prefiro não dizer</option>
+                            <option>Masculino</option>
+                            <option>Feminino</option>
+                            <option>Outro</option>
+                        </select>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Advantages Section -->
-        <section id="advantages" class="bg-white py-20 px-6">
-            <div class="container mx-auto text-center">
-                <h2 class="text-3xl md:text-4xl font-bold mb-12 fade-in-section">Vantagens que fazem a diferença</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
-                    <!-- Advantage Item 1 -->
-                    <div class="fade-in-section p-6 interactive-card rounded-lg">
-                        <div class="bg-purple-100 text-purple-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Entrega em 48 Horas</h3>
-                        <p class="text-gray-600">Sua página no ar em tempo recorde para você não perder nenhuma oportunidade.</p>
+                <div>
+                    <label for="profile-job" class="block text-sm font-medium text-gray-700">Trabalho Atual</label>
+                    <input type="text" id="profile-job" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                     <div>
+                        <label for="profile-main-income" class="block text-sm font-medium text-gray-700">Renda Principal (R$)</label>
+                        <input type="number" id="profile-main-income" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                     </div>
-                    <!-- Advantage Item 2 -->
-                    <div class="fade-in-section p-6 interactive-card rounded-lg">
-                        <div class="bg-purple-100 text-purple-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Design Moderno e Responsivo</h3>
-                        <p class="text-gray-600">Visual impactante que funciona perfeitamente em celulares, tablets e desktops.</p>
-                    </div>
-                    <!-- Advantage Item 3 -->
-                    <div class="fade-in-section p-6 interactive-card rounded-lg">
-                        <div class="bg-purple-100 text-purple-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Otimizada para Conversão</h3>
-                        <p class="text-gray-600">Estrutura pensada para guiar seu cliente até a ação desejada: comprar ou contatar.</p>
-                    </div>
-                    <!-- Advantage Item 4 -->
-                    <div class="fade-in-section p-6 interactive-card rounded-lg">
-                        <div class="bg-purple-100 text-purple-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Integração Direta</h3>
-                        <p class="text-gray-600">Leve seus clientes direto para o WhatsApp, Instagram, Linktree ou onde você preferir.</p>
-                    </div>
-                     <!-- Advantage Item 5 -->
-                    <div class="fade-in-section p-6 interactive-card rounded-lg">
-                        <div class="bg-purple-100 text-purple-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Sem Mensalidade Obrigatória</h3>
-                        <p class="text-gray-600">Pague uma vez e a página é sua para sempre. Hospedagem gratuita via GitHub.</p>
-                    </div>
-                     <!-- Advantage Item 6 -->
-                    <div class="fade-in-section p-6 interactive-card rounded-lg">
-                        <div class="bg-purple-100 text-purple-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l-2.293-2.293a1 1 0 010-1.414l7-7a1 1 0 011.414 0l7 7a1 1 0 010 1.414L17 21m-7-3a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" /></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Ideal Para Todos os Negócios</h3>
-                        <p class="text-gray-600">Perfeita para produtos, serviços, eventos, cursos, perfis e negócios locais.</p>
+                     <div>
+                        <label for="profile-extra-income" class="block text-sm font-medium text-gray-700">Renda Extra (R$)</label>
+                        <input type="number" id="profile-extra-income" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Testimonial Section -->
-        <section id="testimonial" class="py-20 px-6 bg-gray-50">
-            <div class="container mx-auto max-w-3xl text-center fade-in-section">
-                <div class="bg-white p-12 rounded-xl shadow-lg border interactive-card">
-                    <img src="https://placehold.co/100x100/4299E1/FFFFFF?text=J" alt="Foto do cliente" class="w-24 h-24 rounded-full mx-auto -mt-24 border-4 border-white shadow-md">
-                    <p class="text-xl italic text-gray-700 my-6">"Vendi meu curso com a LandPage Fácil e economizei tempo e dinheiro! O processo foi super rápido e o resultado ficou mais profissional do que eu imaginava. Recomendo demais!"</p>
-                    <h4 class="font-bold text-lg">Juliana Silva</h4>
-                    <p class="text-gray-500">Criadora de Conteúdo</p>
+                <div class="pt-4 space-y-4">
+                    <button type="submit" class="w-full py-2.5 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700">Salvar Alterações</button>
+                    <button type="button" id="logout-btn" class="w-full py-2.5 px-4 bg-rose-600 text-white font-semibold rounded-lg hover:bg-rose-700">Sair da Conta</button>
                 </div>
-            </div>
-        </section>
-
-        <!-- Pricing Section -->
-        <section id="pricing" class="py-20 px-6 bg-white">
-            <div class="container mx-auto max-w-4xl text-center">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 fade-in-section">Um investimento, retorno infinito.</h2>
-                <p class="text-lg text-gray-600 mb-12 max-w-2xl mx-auto fade-in-section">Tenha sua página profissional com um pagamento único e transparente.</p>
-                <div class="bg-gradient-to-br from-purple-600 to-blue-500 text-white p-8 md:p-12 rounded-2xl shadow-2xl max-w-2xl mx-auto fade-in-section interactive-card">
-                    <h3 class="text-2xl font-semibold mb-2">LandPage Fácil</h3>
-                    <p class="text-5xl md:text-6xl font-black mb-4">R$ 1.100</p>
-                    <p class="font-light mb-8">Pagamento único</p>
-                    <ul class="text-left space-y-4 mb-10 inline-block">
-                        <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Criação e personalização completa</li>
-                        <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Entrega em até 48 horas</li>
-                        <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Hospedagem gratuita (GitHub Pages)</li>
-                        <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Redirecionamento para redes sociais</li>
-                        <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Layout 100% responsivo</li>
-                    </ul>
-                    <a href="https://instagram.com/marllongabrel" target="_blank" class="cta-button bg-white text-purple-600 font-bold py-4 px-10 rounded-full text-lg inline-block w-full max-w-md">
-                        Contratar Agora
-                    </a>
-                </div>
-                 <div class="mt-8 fade-in-section">
-                    <h4 class="text-xl font-bold mb-2">Precisa de Manutenção?</h4>
-                    <p class="text-gray-600">Para atualizações e edições futuras, oferecemos um plano opcional de <strong class="text-purple-600">R$ 150,00 mensal</strong>.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ Section -->
-        <section id="faq" class="py-20 px-6">
-            <div class="container mx-auto max-w-3xl">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 fade-in-section">Dúvidas Frequentes</h2>
-                <div class="space-y-4 fade-in-section">
-                    <!-- FAQ Item 1 -->
-                    <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
-                        <div class="faq-question flex justify-between items-center p-6">
-                            <h4 class="font-semibold text-lg">Posso usar meu próprio domínio?</h4>
-                            <div class="faq-arrow w-6 h-6 text-purple-500">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                            </div>
-                        </div>
-                        <div class="faq-answer text-gray-600">
-                            <p>Sim! A página é entregue com os arquivos prontos. Você pode hospedá-la gratuitamente no GitHub Pages ou em qualquer outro servidor e apontar seu domínio para ela sem problemas.</p>
-                        </div>
-                    </div>
-                    <!-- FAQ Item 2 -->
-                    <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
-                        <div class="faq-question flex justify-between items-center p-6">
-                            <h4 class="font-semibold text-lg">Preciso de um formulário de contato?</h4>
-                            <div class="faq-arrow w-6 h-6 text-purple-500">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                            </div>
-                        </div>
-                        <div class="faq-answer text-gray-600">
-                            <p>O foco do LandPage Fácil é a conversão rápida e direta, por isso priorizamos o redirecionamento para canais como WhatsApp ou e-mail. Caso precise de um formulário, podemos avaliar a inclusão como um item adicional.</p>
-                        </div>
-                    </div>
-                    <!-- FAQ Item 3 -->
-                    <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
-                        <div class="faq-question flex justify-between items-center p-6">
-                            <h4 class="font-semibold text-lg">As imagens e textos estão inclusos?</h4>
-                            <div class="faq-arrow w-6 h-6 text-purple-500">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                            </div>
-                        </div>
-                        <div class="faq-answer text-gray-600">
-                            <p>Você nos envia os textos, sua logo e as imagens que deseja usar. Nós cuidamos de toda a parte de design e estruturação para que sua identidade visual seja perfeitamente aplicada à página.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Final CTA Section -->
-        <section class="animated-gradient text-white py-20 px-6">
-            <div class="container mx-auto text-center max-w-3xl">
-                <h2 class="text-3xl md:text-5xl font-black mb-6 fade-in-section">Pronto para Lançar sua Página de Sucesso?</h2>
-                <p class="text-lg md:text-xl font-light mb-10 fade-in-section">Não espere mais. Fale conosco e tenha sua landing page profissional no ar em 48 horas.</p>
-                <a href="https://instagram.com/marllongabrel" target="_blank" class="cta-button bg-white text-purple-600 font-bold py-4 px-12 rounded-full text-xl inline-block fade-in-section">
-                    Quero minha landpage agora!
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-6 px-6">
-        <div class="container mx-auto text-center text-gray-400">
-            <p>&copy; 2024 LandPage Fácil. Todos os direitos reservados.</p>
-            <p>Criado com❤️ para impulsionar seu negócio.</p>
+            </form>
         </div>
-    </footer>
+    </template>
+    
+    <template id="page-add">
+        <div class="page p-5 pb-24">
+            <h1 class="text-xl font-bold text-gray-800 mb-6">Nova Transação</h1>
+            <form id="transaction-form" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <input type="radio" id="type-expense" name="type" value="expense" class="hidden" checked>
+                        <label for="type-expense" class="block text-center w-full py-2 border-2 rounded-lg cursor-pointer">Despesa</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="type-income" name="type" value="income" class="hidden">
+                        <label for="type-income" class="block text-center w-full py-2 border-2 rounded-lg cursor-pointer">Ganho</label>
+                    </div>
+                </div>
+                <div>
+                    <label for="amount" class="text-sm font-medium text-gray-700">Valor</label>
+                    <div class="relative mt-1"><div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"><span class="text-gray-500 sm:text-sm">R$</span></div><input type="number" step="0.01" name="amount" id="amount" class="block w-full rounded-md border-gray-300 pl-10 pr-4 py-2 focus:border-indigo-500 focus:ring-indigo-500" placeholder="0,00" required></div>
+                </div>
+                <div>
+                    <label for="description" class="text-sm font-medium text-gray-700">Descrição</label>
+                    <input type="text" name="description" id="description" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Ex: Almoço com amigos" required>
+                </div>
+                <div>
+                    <label for="category" class="text-sm font-medium text-gray-700">Categoria</label>
+                    <select id="category" name="category" class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500" required><option>Alimentação</option><option>Transporte</option><option>Lazer</option><option>Compras</option><option>Moradia</option><option>Salário</option><option>Outros</option></select>
+                </div>
+                <div>
+                    <label for="date" class="text-sm font-medium text-gray-700">Data</label>
+                    <input type="date" name="date" id="date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                </div>
+                <div class="pt-2"><button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">Salvar Transação</button></div>
+            </form>
+        </div>
+    </template>
+    
+    <template id="page-reports">
+        <div class="page p-4 pb-24">
+            <h1 class="text-2xl font-bold text-gray-800 mb-6">Relatórios</h1>
+            <div class="bg-gray-100 p-4 rounded-xl mb-6"><h3 class="font-semibold text-gray-700 mb-2">Gastos por Categoria (Este Mês)</h3><div id="category-chart-container"></div></div>
+            <div class="bg-gray-100 p-4 rounded-xl"><h3 class="font-semibold text-gray-700 mb-2">Histórico de Transações</h3><div id="full-transaction-list" class="space-y-3"></div></div>
+        </div>
+    </template>
 
-    <script>
-        // JavaScript for animations and FAQ accordion
+    <template id="page-goals">
+        <div class="page p-4 pb-24">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold text-gray-800">Metas Financeiras</h1>
+                <button id="add-goal-btn" class="bg-indigo-600 text-white rounded-full p-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" /></svg></button>
+            </div>
+            <div id="goals-list" class="space-y-4"></div>
+        </div>
+    </template>
 
-        // Scroll-triggered animations
-        document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('.fade-in-section');
+    <!-- Scripts do Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Use a timeout to stagger the animation slightly for a nicer effect
-                        setTimeout(() => {
-                            entry.target.classList.add('is-visible');
-                        }, 200);
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
+    <script type="module">
+        // --- Configuração do Firebase ---
+        const firebaseConfig = {
+          apiKey: "AIzaSyAESU5FMb7mX1QqtK_VcWJuvLq_je787cg",
+          authDomain: "financasapp-a24a1.firebaseapp.com",
+          projectId: "financasapp-a24a1",
+          storageBucket: "financasapp-a24a1.appspot.com",
+          messagingSenderId: "488847724956",
+          appId: "1:488847724956:web:01509c9f3fd9f49f80b859",
+          measurementId: "G-V3PT7RNGRM"
+        };
+        
+        // --- Inicialização ---
+        let auth, db;
+        let currentUser = null;
+        try {
+            firebase.initializeApp(firebaseConfig);
+            auth = firebase.auth();
+            db = firebase.firestore();
+        } catch (e) {
+            console.error("Erro ao inicializar o Firebase:", e);
+            auth = null; db = null; 
+        }
 
-            sections.forEach(section => {
-                observer.observe(section);
-            });
+        const appRoot = document.getElementById('app-root');
+        let pageTemplates = {};
+
+        // --- Lógica de Autenticação ---
+        function showWelcomeScreen() {
+            appRoot.innerHTML = pageTemplates.welcome;
+            document.getElementById('welcome-login-btn').addEventListener('click', showLoginScreen);
+            document.getElementById('welcome-register-btn').addEventListener('click', showRegisterScreen);
+        }
+
+        function showLoginScreen() {
+            appRoot.innerHTML = pageTemplates.login;
+            document.getElementById('login-form').addEventListener('submit', handleLogin);
+            document.getElementById('goto-register').addEventListener('click', (e) => { e.preventDefault(); showRegisterScreen(); });
+        }
+
+        function showRegisterScreen() {
+            appRoot.innerHTML = pageTemplates.register;
+            document.getElementById('register-form').addEventListener('submit', handleRegister);
+            document.getElementById('goto-login').addEventListener('click', (e) => { e.preventDefault(); showLoginScreen(); });
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            try { await auth.signInWithEmailAndPassword(email, password); } 
+            catch (error) { alert("Erro no login: " + error.message); }
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            try { await auth.createUserWithEmailAndPassword(email, password); } 
+            catch (error) { alert("Erro no cadastro: " + error.message); }
+        }
+
+        function handleLogout() { auth.signOut(); }
+
+        // --- Listener de Estado de Autenticação ---
+        auth?.onAuthStateChanged(user => {
+            if (user) {
+                currentUser = user;
+                initializeApp();
+            } else {
+                currentUser = null;
+                showWelcomeScreen();
+            }
         });
 
-        // FAQ Accordion
-        document.addEventListener('DOMContentLoaded', () => {
-            const faqItems = document.querySelectorAll('.faq-item');
-            
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question');
-                question.addEventListener('click', () => {
-                    const currentlyActive = document.querySelector('.faq-item.active');
-                    if (currentlyActive && currentlyActive !== item) {
-                        currentlyActive.classList.remove('active');
-                    }
-                    item.classList.toggle('active');
-                });
+        // --- Lógica Principal do App (após login) ---
+        let profile = {};
+        let transactions = [];
+        let goals = [];
+
+        async function initializeApp() {
+            appRoot.innerHTML = pageTemplates.mainApp;
+            await loadUserData();
+            window.addEventListener('hashchange', () => navigateTo(window.location.hash));
+            navigateTo(window.location.hash || '#dashboard');
+        }
+        
+        async function loadUserData() {
+            if (!db || !currentUser) return;
+            const doc = await db.collection('users').doc(currentUser.uid).get();
+            if (doc.exists) {
+                const data = doc.data();
+                profile = data.profile || {};
+                transactions = data.transactions ? data.transactions.map(t => ({...t, date: new Date(t.date)})) : [];
+                goals = data.goals || [];
+            }
+            if (auth.currentUser.photoURL && !profile.photoURL) {
+                profile.photoURL = auth.currentUser.photoURL;
+            }
+        }
+
+        async function saveUserData() {
+            if (!db || !currentUser) return;
+            const dataToSave = {
+                profile,
+                transactions: transactions.map(t => ({...t, date: t.date.toISOString()})),
+                goals
+            };
+            await db.collection('users').doc(currentUser.uid).set(dataToSave, { merge: true });
+        }
+        
+        function navigateTo(hash) {
+            const pageId = hash.replace('#', '') || 'dashboard';
+            const appContainer = document.getElementById('app-container');
+            if (pageTemplates[pageId] && appContainer) {
+                appContainer.innerHTML = pageTemplates[pageId];
+                runPageScripts(pageId);
+                updateNavLinks(hash || '#dashboard');
+            }
+        }
+
+        function updateNavLinks(activeHash) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                const is_active = link.getAttribute('href') === activeHash;
+                link.classList.toggle('text-indigo-600', is_active);
+                link.classList.toggle('text-gray-400', !is_active);
             });
-        });
+        }
+
+        function runPageScripts(pageId) {
+            switch(pageId) {
+                case 'dashboard': renderDashboard(); break;
+                case 'profile': setupProfilePage(); break;
+                case 'add': setupAddTransactionForm(); break;
+                case 'reports': renderReports(); break;
+                case 'goals': setupGoalsPage(); break;
+            }
+        }
+        
+        function formatCurrency(value) {
+            return (value || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        function renderDashboard() {
+            const greeting = document.getElementById('dashboard-greeting');
+            const profilePic = document.getElementById('dashboard-profile-pic');
+            const firstName = profile.name ? profile.name.split(' ')[0] : 'Usuário';
+            greeting.textContent = `Olá, ${firstName}!`;
+            profilePic.src = profile.photoURL || `https://placehold.co/48x48/6366F1/FFFFFF?text=${firstName.charAt(0)}`;
+
+            const currentMonthTxs = transactions.filter(t => new Date(t.date).getMonth() === new Date().getMonth());
+            const income = currentMonthTxs.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
+            const expenses = currentMonthTxs.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
+            const balance = transactions.reduce((sum, t) => sum + (t.type === 'income' ? t.amount : -t.amount), 0);
+
+            document.getElementById('dashboard-balance').textContent = formatCurrency(balance);
+            document.getElementById('dashboard-income').textContent = formatCurrency(income);
+            document.getElementById('dashboard-expenses').textContent = formatCurrency(expenses);
+
+            const budget = (profile.mainIncome || 0) + (profile.extraIncome || 0);
+            const percentageUsed = budget > 0 ? (expenses / budget) * 100 : 0;
+            document.getElementById('budget-bar').style.width = `${Math.min(percentageUsed, 100)}%`;
+            document.getElementById('budget-percentage').textContent = `${percentageUsed.toFixed(0)}% usado`;
+            document.getElementById('budget-summary').textContent = `Restam ${formatCurrency(budget - expenses)} de ${formatCurrency(budget)}`;
+
+            const recentTxs = [...transactions].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
+            const recentContainer = document.getElementById('recent-transactions');
+            recentContainer.innerHTML = recentTxs.length === 0 ? '<p class="text-gray-500 text-sm">Nenhuma transação ainda.</p>' : recentTxs.map(tx => {
+                const isExpense = tx.type === 'expense';
+                return `<div class="flex items-center"><div><p class="font-medium text-gray-800">${tx.description}</p><p class="text-sm text-gray-500">${tx.category}</p></div><div class="ml-auto text-right"><p class="font-semibold ${isExpense ? 'text-rose-500' : 'text-green-500'}">${isExpense ? '-' : '+'} ${formatCurrency(tx.amount)}</p><p class="text-xs text-gray-400">${new Date(tx.date).toLocaleDateString('pt-BR')}</p></div></div>`;
+            }).join('');
+        }
+
+        function setupProfilePage() {
+            document.getElementById('profile-name').value = profile.name || '';
+            document.getElementById('profile-age').value = profile.age || '';
+            document.getElementById('profile-gender').value = profile.gender || 'Prefiro não dizer';
+            document.getElementById('profile-job').value = profile.job || '';
+            document.getElementById('profile-main-income').value = profile.mainIncome || '';
+            document.getElementById('profile-extra-income').value = profile.extraIncome || '';
+            document.getElementById('profile-pic-preview').src = profile.photoURL || `https://placehold.co/96x96/6366F1/FFFFFF?text=${(profile.name || 'U').charAt(0)}`;
+
+            const uploadInput = document.getElementById('profile-pic-upload');
+            document.getElementById('change-pic-btn').addEventListener('click', () => uploadInput.click());
+            uploadInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        document.getElementById('profile-pic-preview').src = event.target.result;
+                        profile.photoURL = event.target.result; 
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            document.getElementById('profile-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                profile.name = document.getElementById('profile-name').value;
+                profile.age = document.getElementById('profile-age').value;
+                profile.gender = document.getElementById('profile-gender').value;
+                profile.job = document.getElementById('profile-job').value;
+                profile.mainIncome = parseFloat(document.getElementById('profile-main-income').value) || 0;
+                profile.extraIncome = parseFloat(document.getElementById('profile-extra-income').value) || 0;
+                await saveUserData();
+                alert('Perfil atualizado com sucesso!');
+                navigateTo('#dashboard');
+            });
+
+            document.getElementById('logout-btn').addEventListener('click', handleLogout);
+        }
+        
+        function setupAddTransactionForm() {
+            document.getElementById('date').valueAsDate = new Date();
+            document.getElementById('transaction-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                transactions.push({
+                    id: Date.now().toString(),
+                    type: formData.get('type'),
+                    amount: parseFloat(formData.get('amount')),
+                    description: formData.get('description'),
+                    category: formData.get('category'),
+                    date: new Date(formData.get('date') + 'T00:00:00'),
+                });
+                await saveUserData();
+                window.location.hash = '#dashboard';
+            });
+        }
+        
+        function renderReports() {
+            // Lógica para renderizar relatórios
+        }
+
+        function setupGoalsPage() {
+            // Lógica para a página de metas
+        }
+
+        // --- Inicialização da Aplicação ---
+        function bootApp() {
+            pageTemplates = {
+                welcome: document.getElementById('template-welcome').innerHTML,
+                login: document.getElementById('template-login').innerHTML,
+                register: document.getElementById('template-register').innerHTML,
+                mainApp: document.getElementById('template-main-app').innerHTML,
+                dashboard: document.getElementById('page-dashboard').innerHTML,
+                profile: document.getElementById('page-profile').innerHTML,
+                add: document.getElementById('page-add').innerHTML,
+                reports: document.getElementById('page-reports').innerHTML,
+                goals: document.getElementById('page-goals').innerHTML,
+            };
+
+            if (!auth) {
+                appRoot.innerHTML = `<div class="p-4 text-center text-red-600">Falha ao conectar com os serviços. Tente recarregar a página.</div>`;
+            } else if (!auth.currentUser) {
+                showWelcomeScreen();
+            }
+        }
+
+        bootApp();
 
     </script>
-
 </body>
 </html>
